@@ -1,0 +1,16 @@
+# base image to adjust
+FROM python:3.9
+
+# command to install pandas library in python:3.9 image
+RUN pip install pandas
+
+# destination that file will be copied into in docker image
+WORKDIR /app
+# copies source file (first pipeline.py) and pastes in source docker image 
+COPY pipeline.py pipeline.py
+
+# overrides the entrypoint, so when docker is run, we start with the bash terminal
+# ENTRYPOINT [ "bash" ]
+
+# sets the entrypoint to run our pipeline.py file within the image
+ENTRYPOINT [ "python", "pipeline.py" ]
